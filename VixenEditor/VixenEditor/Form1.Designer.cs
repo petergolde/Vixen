@@ -64,14 +64,14 @@
             this.textBoxCopyTo = new System.Windows.Forms.TextBox();
             this.textBoxMergeTo = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.buttonGo = new System.Windows.Forms.Button();
+            this.buttonSaveMainFile = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.upDownTemplateAlign = new VixenEditor.TimeSpanUpDown();
             this.upDownTemplateEndTime = new VixenEditor.TimeSpanUpDown();
             this.upDownTemplateStartTime = new VixenEditor.TimeSpanUpDown();
             this.upDownEndTime = new VixenEditor.TimeSpanUpDown();
             this.upDownStartTime = new VixenEditor.TimeSpanUpDown();
-            this.buttonGo = new System.Windows.Forms.Button();
-            this.buttonSaveMainFile = new System.Windows.Forms.Button();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -465,6 +465,32 @@
             this.label17.TabIndex = 2;
             this.label17.Text = "Merge channel numbers:";
             // 
+            // buttonGo
+            // 
+            this.buttonGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGo.Location = new System.Drawing.Point(210, 492);
+            this.buttonGo.Name = "buttonGo";
+            this.buttonGo.Size = new System.Drawing.Size(140, 42);
+            this.buttonGo.TabIndex = 6;
+            this.buttonGo.Text = "Go!";
+            this.buttonGo.UseVisualStyleBackColor = true;
+            this.buttonGo.Click += new System.EventHandler(this.buttonGo_Click);
+            // 
+            // buttonSaveMainFile
+            // 
+            this.buttonSaveMainFile.Location = new System.Drawing.Point(6, 48);
+            this.buttonSaveMainFile.Name = "buttonSaveMainFile";
+            this.buttonSaveMainFile.Size = new System.Drawing.Size(108, 23);
+            this.buttonSaveMainFile.TabIndex = 10;
+            this.buttonSaveMainFile.Text = "Save File...";
+            this.buttonSaveMainFile.UseVisualStyleBackColor = true;
+            this.buttonSaveMainFile.Click += new System.EventHandler(this.buttonSaveMainFile_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "vix";
+            this.saveFileDialog.Filter = "Vixen Files|*.vix";
+            // 
             // upDownTemplateAlign
             // 
             this.upDownTemplateAlign.Increment = System.TimeSpan.Parse("00:00:00.1000000");
@@ -524,31 +550,6 @@
             this.upDownStartTime.TabIndex = 3;
             this.upDownStartTime.Text = "0:00.000";
             this.upDownStartTime.Value = System.TimeSpan.Parse("00:00:00");
-            // 
-            // buttonGo
-            // 
-            this.buttonGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGo.Location = new System.Drawing.Point(210, 492);
-            this.buttonGo.Name = "buttonGo";
-            this.buttonGo.Size = new System.Drawing.Size(140, 42);
-            this.buttonGo.TabIndex = 6;
-            this.buttonGo.Text = "Go!";
-            this.buttonGo.UseVisualStyleBackColor = true;
-            // 
-            // buttonSaveMainFile
-            // 
-            this.buttonSaveMainFile.Location = new System.Drawing.Point(6, 48);
-            this.buttonSaveMainFile.Name = "buttonSaveMainFile";
-            this.buttonSaveMainFile.Size = new System.Drawing.Size(108, 23);
-            this.buttonSaveMainFile.TabIndex = 10;
-            this.buttonSaveMainFile.Text = "Save File...";
-            this.buttonSaveMainFile.UseVisualStyleBackColor = true;
-            this.buttonSaveMainFile.Click += new System.EventHandler(this.buttonSaveMainFile_Click);
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.DefaultExt = "vix";
-            this.saveFileDialog.Filter = "Vixen Files|*.vix";
             // 
             // Form1
             // 

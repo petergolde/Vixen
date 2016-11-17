@@ -122,5 +122,10 @@ namespace VixenEditor
             return result.ToArray();
         }
 
+        private void buttonGo_Click(object sender, EventArgs e)
+        {
+            DoEdit();
+            MessageBox.Show("Edit has been performed. Click Save to save file.");
+        }
     }
 }
