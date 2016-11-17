@@ -38,6 +38,15 @@ namespace VixenEditor
             }
         }
 
+
+        private void buttonSaveMainFile_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK) {
+                string fileName = saveFileDialog.FileName;
+                vixenFile.Save(fileName);
+            }
+        }
+
         private void UpdateMainFileControls()
         {
             labelFileName.Text = vixenFile.BaseFileName;
@@ -68,5 +77,50 @@ namespace VixenEditor
             upDownTemplateStartTime.MaximumValue = upDownTemplateEndTime.MaximumValue = upDownTemplateAlign.MaximumValue = templateFile.TotalLength;
             upDownTemplateStartTime.Increment = upDownTemplateEndTime.Increment = upDownTemplateAlign.Increment = templateFile.PeriodLength;
         }
+
+        private void DoEdit()
+        {
+            TimeSpan triggerStart = upDownStartTime.Value;
+            TimeSpan triggerEnd = upDownEndTime.Value;
+            int triggerChannel = (int) upDownTriggerChannel.Value;
+            int every = (int)upDownTriggerEvery.Value;
+
+            TimeSpan templateStart = upDownTemplateStartTime.Value;
+            TimeSpan templateEnd = upDownTemplateEndTime.Value;
+            TimeSpan templateAlign = upDownTemplateAlign.Value;
+
+            int[] channelsCopy = ParseChannelNumbers(textBoxCopyTo.Text);
+            int[] channelsMerge = ParseChannelNumbers(textBoxMergeTo.Text);
+
+            EditVixen editVixen = new EditVixen(vixenFile, templateFile);
+            foreach (TimeSpan triggerLocation in editVixen.EnumTriggerPoints(triggerStart, triggerEnd, triggerChannel, every)) {
+                editVixen.CopyTemplate(templateStart, templateEnd, templateAlign, triggerLocation, channelsCopy, false);
+                editVixen.CopyTemplate(templateStart, templateEnd, templateAlign, triggerLocation, channelsMerge, true);
+            }
+        }
+
+        int[] ParseChannelNumbers(string text)
+        {
+            List<int> result = new List<int>();
+            string[] split = text.Split(new[] { ',', ';', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (String s in split) {
+                if (s.Contains('-')) {
+                    string[] range = s.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (range.Length != 2) {
+                        throw new Exception("Bad channel numbers: " + text);
+                    }
+                    int first = int.Parse(range[0]), last = int.Parse(range[1]);
+                    for (int i = first; i <= last; ++i)
+                        result.Add(i);
+                }
+                else {
+                    result.Add(int.Parse(s));
+                }
+            }
+
+            return result.ToArray();
+        }
+
     }
 }

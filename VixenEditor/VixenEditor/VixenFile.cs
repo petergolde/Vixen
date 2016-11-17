@@ -11,6 +11,7 @@ namespace VixenEditor
     {
         private string fileName;
         XmlDocument xmlDocument;
+        TimeSpan totalLength, periodLength;
         byte[] data;
 
         public VixenFile(string fileName)
@@ -19,6 +20,12 @@ namespace VixenEditor
             xmlDocument = new XmlDocument();
             xmlDocument.PreserveWhitespace = true;
             xmlDocument.Load(fileName);
+
+            XmlNode node = xmlDocument.SelectSingleNode("/Program/Time");
+            totalLength = TimeSpan.FromMilliseconds(XmlConvert.ToInt64(node.InnerText));
+
+            node = xmlDocument.SelectSingleNode("/Program/EventPeriodInMilliseconds");
+            periodLength = TimeSpan.FromMilliseconds(XmlConvert.ToInt64(node.InnerText));
 
             LoadData();
         }
@@ -37,8 +44,7 @@ namespace VixenEditor
         {
             get
             {
-                XmlNode node = xmlDocument.SelectSingleNode("/Program/Time");
-                return TimeSpan.FromMilliseconds(XmlConvert.ToInt64(node.InnerText));
+                return totalLength;
             }
         }
 
@@ -46,8 +52,7 @@ namespace VixenEditor
         {
             get
             {
-                XmlNode node = xmlDocument.SelectSingleNode("/Program/EventPeriodInMilliseconds");
-                return TimeSpan.FromMilliseconds(XmlConvert.ToInt64(node.InnerText));
+                return periodLength;
             }
         }
 
@@ -64,6 +69,38 @@ namespace VixenEditor
             get { return data.Length / NumberOfPeriods; }
         }
 
+        public byte GetData(int channel, TimeSpan time)
+        {
+            if (time >= TotalLength || time.TotalMilliseconds < 0) {
+                throw new ArgumentException("Invalid time location", nameof(time));
+            }
+            if (channel < 1 || channel > Channels) {
+                throw new ArgumentException("Invalid channel number", nameof(channel));
+            }
+
+            int period = (int) Math.Round(time.TotalMilliseconds / PeriodLength.TotalMilliseconds);
+            return data[(channel - 1) * NumberOfPeriods + period];
+        }
+
+        public void SetData(int channel, TimeSpan time, byte value)
+        {
+            if (time >= TotalLength || time.TotalMilliseconds < 0) {
+                throw new ArgumentException("Invalid time location", nameof(time));
+            }
+            if (channel < 1 || channel > Channels) {
+                throw new ArgumentException("Invalid channel number", nameof(channel));
+            }
+
+            int period = (int)Math.Round(time.TotalMilliseconds / PeriodLength.TotalMilliseconds);
+            data[(channel - 1) * NumberOfPeriods + period] = value;
+        }
+
+        public void Save(string fileName)
+        {
+            SaveData();
+            xmlDocument.Save(fileName);
+        }
+
         private void LoadData()
         {
             XmlNode node = xmlDocument.SelectSingleNode("/Program/EventValues");
@@ -71,7 +108,10 @@ namespace VixenEditor
             data = Convert.FromBase64String(eventValues);
         }
 
-
-
+        private void SaveData()
+        {
+            XmlNode node = xmlDocument.SelectSingleNode("/Program/EventValues");
+            node.InnerText = Convert.ToBase64String(data);
+        }
     }
 }

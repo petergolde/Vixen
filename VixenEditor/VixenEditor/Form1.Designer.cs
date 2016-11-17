@@ -52,23 +52,26 @@
             this.label3 = new System.Windows.Forms.Label();
             this.upDownTriggerChannel = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.upDownStartTime = new VixenEditor.TimeSpanUpDown();
-            this.upDownEndTime = new VixenEditor.TimeSpanUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.upDownTriggerEvery = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.upDownTemplateEndTime = new VixenEditor.TimeSpanUpDown();
             this.label13 = new System.Windows.Forms.Label();
-            this.upDownTemplateStartTime = new VixenEditor.TimeSpanUpDown();
             this.label14 = new System.Windows.Forms.Label();
-            this.upDownTemplateAlign = new VixenEditor.TimeSpanUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxCopyTo = new System.Windows.Forms.TextBox();
             this.textBoxMergeTo = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.upDownTemplateAlign = new VixenEditor.TimeSpanUpDown();
+            this.upDownTemplateEndTime = new VixenEditor.TimeSpanUpDown();
+            this.upDownTemplateStartTime = new VixenEditor.TimeSpanUpDown();
+            this.upDownEndTime = new VixenEditor.TimeSpanUpDown();
+            this.upDownStartTime = new VixenEditor.TimeSpanUpDown();
+            this.buttonGo = new System.Windows.Forms.Button();
+            this.buttonSaveMainFile = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -87,6 +90,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.buttonSaveMainFile);
             this.groupBox1.Controls.Add(this.labelChannels);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.labelPeriod);
@@ -331,28 +335,6 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "Start Time:";
             // 
-            // upDownStartTime
-            // 
-            this.upDownStartTime.Increment = System.TimeSpan.Parse("00:00:00.1000000");
-            this.upDownStartTime.Location = new System.Drawing.Point(378, 24);
-            this.upDownStartTime.MaximumValue = System.TimeSpan.Parse("00:01:00");
-            this.upDownStartTime.MinimumValue = System.TimeSpan.Parse("00:00:00");
-            this.upDownStartTime.Name = "upDownStartTime";
-            this.upDownStartTime.Size = new System.Drawing.Size(104, 20);
-            this.upDownStartTime.TabIndex = 3;
-            this.upDownStartTime.Value = System.TimeSpan.Parse("00:00:00");
-            // 
-            // upDownEndTime
-            // 
-            this.upDownEndTime.Increment = System.TimeSpan.Parse("00:00:00.1000000");
-            this.upDownEndTime.Location = new System.Drawing.Point(378, 50);
-            this.upDownEndTime.MaximumValue = System.TimeSpan.Parse("00:01:00");
-            this.upDownEndTime.MinimumValue = System.TimeSpan.Parse("00:00:00");
-            this.upDownEndTime.Name = "upDownEndTime";
-            this.upDownEndTime.Size = new System.Drawing.Size(104, 20);
-            this.upDownEndTime.TabIndex = 5;
-            this.upDownEndTime.Value = System.TimeSpan.Parse("00:00:00");
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -405,17 +387,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Template To Copy";
             // 
-            // upDownTemplateEndTime
-            // 
-            this.upDownTemplateEndTime.Increment = System.TimeSpan.Parse("00:00:00.1000000");
-            this.upDownTemplateEndTime.Location = new System.Drawing.Point(91, 56);
-            this.upDownTemplateEndTime.MaximumValue = System.TimeSpan.Parse("00:01:00");
-            this.upDownTemplateEndTime.MinimumValue = System.TimeSpan.Parse("00:00:00");
-            this.upDownTemplateEndTime.Name = "upDownTemplateEndTime";
-            this.upDownTemplateEndTime.Size = new System.Drawing.Size(104, 20);
-            this.upDownTemplateEndTime.TabIndex = 9;
-            this.upDownTemplateEndTime.Value = System.TimeSpan.Parse("00:00:00");
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -425,17 +396,6 @@
             this.label13.TabIndex = 8;
             this.label13.Text = "End Time:";
             // 
-            // upDownTemplateStartTime
-            // 
-            this.upDownTemplateStartTime.Increment = System.TimeSpan.Parse("00:00:00.1000000");
-            this.upDownTemplateStartTime.Location = new System.Drawing.Point(91, 30);
-            this.upDownTemplateStartTime.MaximumValue = System.TimeSpan.Parse("00:01:00");
-            this.upDownTemplateStartTime.MinimumValue = System.TimeSpan.Parse("00:00:00");
-            this.upDownTemplateStartTime.Name = "upDownTemplateStartTime";
-            this.upDownTemplateStartTime.Size = new System.Drawing.Size(104, 20);
-            this.upDownTemplateStartTime.TabIndex = 7;
-            this.upDownTemplateStartTime.Value = System.TimeSpan.Parse("00:00:00");
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -444,17 +404,6 @@
             this.label14.Size = new System.Drawing.Size(58, 13);
             this.label14.TabIndex = 6;
             this.label14.Text = "Start Time:";
-            // 
-            // upDownTemplateAlign
-            // 
-            this.upDownTemplateAlign.Increment = System.TimeSpan.Parse("00:00:00.1000000");
-            this.upDownTemplateAlign.Location = new System.Drawing.Point(378, 30);
-            this.upDownTemplateAlign.MaximumValue = System.TimeSpan.Parse("00:01:00");
-            this.upDownTemplateAlign.MinimumValue = System.TimeSpan.Parse("00:00:00");
-            this.upDownTemplateAlign.Name = "upDownTemplateAlign";
-            this.upDownTemplateAlign.Size = new System.Drawing.Size(104, 20);
-            this.upDownTemplateAlign.TabIndex = 11;
-            this.upDownTemplateAlign.Value = System.TimeSpan.Parse("00:00:00");
             // 
             // label15
             // 
@@ -516,11 +465,97 @@
             this.label17.TabIndex = 2;
             this.label17.Text = "Merge channel numbers:";
             // 
+            // upDownTemplateAlign
+            // 
+            this.upDownTemplateAlign.Increment = System.TimeSpan.Parse("00:00:00.1000000");
+            this.upDownTemplateAlign.Location = new System.Drawing.Point(378, 30);
+            this.upDownTemplateAlign.MaximumValue = System.TimeSpan.Parse("00:01:00");
+            this.upDownTemplateAlign.MinimumValue = System.TimeSpan.Parse("00:00:00");
+            this.upDownTemplateAlign.Name = "upDownTemplateAlign";
+            this.upDownTemplateAlign.Size = new System.Drawing.Size(104, 20);
+            this.upDownTemplateAlign.TabIndex = 11;
+            this.upDownTemplateAlign.Text = "0:00.000";
+            this.upDownTemplateAlign.Value = System.TimeSpan.Parse("00:00:00");
+            // 
+            // upDownTemplateEndTime
+            // 
+            this.upDownTemplateEndTime.Increment = System.TimeSpan.Parse("00:00:00.1000000");
+            this.upDownTemplateEndTime.Location = new System.Drawing.Point(91, 56);
+            this.upDownTemplateEndTime.MaximumValue = System.TimeSpan.Parse("00:01:00");
+            this.upDownTemplateEndTime.MinimumValue = System.TimeSpan.Parse("00:00:00");
+            this.upDownTemplateEndTime.Name = "upDownTemplateEndTime";
+            this.upDownTemplateEndTime.Size = new System.Drawing.Size(104, 20);
+            this.upDownTemplateEndTime.TabIndex = 9;
+            this.upDownTemplateEndTime.Text = "0:00.000";
+            this.upDownTemplateEndTime.Value = System.TimeSpan.Parse("00:00:00");
+            // 
+            // upDownTemplateStartTime
+            // 
+            this.upDownTemplateStartTime.Increment = System.TimeSpan.Parse("00:00:00.1000000");
+            this.upDownTemplateStartTime.Location = new System.Drawing.Point(91, 30);
+            this.upDownTemplateStartTime.MaximumValue = System.TimeSpan.Parse("00:01:00");
+            this.upDownTemplateStartTime.MinimumValue = System.TimeSpan.Parse("00:00:00");
+            this.upDownTemplateStartTime.Name = "upDownTemplateStartTime";
+            this.upDownTemplateStartTime.Size = new System.Drawing.Size(104, 20);
+            this.upDownTemplateStartTime.TabIndex = 7;
+            this.upDownTemplateStartTime.Text = "0:00.000";
+            this.upDownTemplateStartTime.Value = System.TimeSpan.Parse("00:00:00");
+            // 
+            // upDownEndTime
+            // 
+            this.upDownEndTime.Increment = System.TimeSpan.Parse("00:00:00.1000000");
+            this.upDownEndTime.Location = new System.Drawing.Point(378, 50);
+            this.upDownEndTime.MaximumValue = System.TimeSpan.Parse("00:01:00");
+            this.upDownEndTime.MinimumValue = System.TimeSpan.Parse("00:00:00");
+            this.upDownEndTime.Name = "upDownEndTime";
+            this.upDownEndTime.Size = new System.Drawing.Size(104, 20);
+            this.upDownEndTime.TabIndex = 5;
+            this.upDownEndTime.Text = "0:00.000";
+            this.upDownEndTime.Value = System.TimeSpan.Parse("00:00:00");
+            // 
+            // upDownStartTime
+            // 
+            this.upDownStartTime.Increment = System.TimeSpan.Parse("00:00:00.1000000");
+            this.upDownStartTime.Location = new System.Drawing.Point(378, 24);
+            this.upDownStartTime.MaximumValue = System.TimeSpan.Parse("00:01:00");
+            this.upDownStartTime.MinimumValue = System.TimeSpan.Parse("00:00:00");
+            this.upDownStartTime.Name = "upDownStartTime";
+            this.upDownStartTime.Size = new System.Drawing.Size(104, 20);
+            this.upDownStartTime.TabIndex = 3;
+            this.upDownStartTime.Text = "0:00.000";
+            this.upDownStartTime.Value = System.TimeSpan.Parse("00:00:00");
+            // 
+            // buttonGo
+            // 
+            this.buttonGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGo.Location = new System.Drawing.Point(210, 492);
+            this.buttonGo.Name = "buttonGo";
+            this.buttonGo.Size = new System.Drawing.Size(140, 42);
+            this.buttonGo.TabIndex = 6;
+            this.buttonGo.Text = "Go!";
+            this.buttonGo.UseVisualStyleBackColor = true;
+            // 
+            // buttonSaveMainFile
+            // 
+            this.buttonSaveMainFile.Location = new System.Drawing.Point(6, 48);
+            this.buttonSaveMainFile.Name = "buttonSaveMainFile";
+            this.buttonSaveMainFile.Size = new System.Drawing.Size(108, 23);
+            this.buttonSaveMainFile.TabIndex = 10;
+            this.buttonSaveMainFile.Text = "Save File...";
+            this.buttonSaveMainFile.UseVisualStyleBackColor = true;
+            this.buttonSaveMainFile.Click += new System.EventHandler(this.buttonSaveMainFile_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "vix";
+            this.saveFileDialog.Filter = "Vixen Files|*.vix";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 546);
+            this.Controls.Add(this.buttonGo);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -588,6 +623,9 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBoxCopyTo;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button buttonSaveMainFile;
+        private System.Windows.Forms.Button buttonGo;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
