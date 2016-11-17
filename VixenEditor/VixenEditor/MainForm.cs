@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace VixenEditor
 {
-    public partial class Form1: Form
+    public partial class MainForm: Form
     {
         VixenFile vixenFile;
         VixenFile templateFile;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -61,6 +61,8 @@ namespace VixenEditor
             upDownStartTime.MinimumValue = upDownEndTime.MinimumValue = TimeSpan.FromMilliseconds(0);
             upDownStartTime.MaximumValue = upDownEndTime.MaximumValue = vixenFile.TotalLength;
             upDownStartTime.Increment = upDownEndTime.Increment = vixenFile.PeriodLength;
+            upDownStartTime.Value = new TimeSpan();
+            upDownEndTime.Value = vixenFile.TotalLength;
 
             textBoxCopyTo.Text = "";
             textBoxMergeTo.Text = string.Format("{0}-{1}", 1, vixenFile.Channels);
@@ -76,6 +78,8 @@ namespace VixenEditor
             upDownTemplateStartTime.MinimumValue = upDownTemplateEndTime.MinimumValue = upDownTemplateAlign.MinimumValue = TimeSpan.FromMilliseconds(0);
             upDownTemplateStartTime.MaximumValue = upDownTemplateEndTime.MaximumValue = upDownTemplateAlign.MaximumValue = templateFile.TotalLength;
             upDownTemplateStartTime.Increment = upDownTemplateEndTime.Increment = upDownTemplateAlign.Increment = templateFile.PeriodLength;
+            upDownTemplateStartTime.Value = new TimeSpan();
+            upDownTemplateEndTime.Value = templateFile.TotalLength - templateFile.PeriodLength;
         }
 
         private void DoEdit()

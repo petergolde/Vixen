@@ -20,7 +20,7 @@ namespace VixenEditor
         public IEnumerable<TimeSpan> EnumTriggerPoints(TimeSpan start, TimeSpan end, int triggerChannel, int every)
         {
             int seen = 0;
-            for (TimeSpan loc = start; loc <= end; loc = loc + mainFile.PeriodLength) {
+            for (TimeSpan loc = start; loc < end; loc = loc + mainFile.PeriodLength) {
                 if (loc.TotalMilliseconds > 0) {
                     TimeSpan prev = loc - mainFile.PeriodLength;
                     if (mainFile.GetData(triggerChannel, prev) == 0 && mainFile.GetData(triggerChannel, loc) >= 128) {
